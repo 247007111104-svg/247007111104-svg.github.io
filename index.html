@@ -1,71 +1,272 @@
-<!DOCTYPE html>
-<html lang="en">
+=<!DOCTYPE html>
+<html lang="en" id="darrennala-theme">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Darrennala Sandeyamugni | Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        // Inisialisasi tema sebelum halaman dimuat untuk mencegah FOUC
+        (function() {
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.className = currentTheme;
+        })();
+    </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { background-color: #0f172a; color: #f8fafc; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
-        .glass:hover { border: 1px solid rgba(59, 130, 246, 0.5); transform: translateY(-2px); }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- MODE GELAP (DARK MODE) STYLES --- */
+        #darrennala-theme.dark body { 
+            background-color: #070914; 
+            background-image: 
+                radial-gradient(circle at 10% 35%, rgba(37, 99, 235, 0.35) 0%, transparent 45%),
+                radial-gradient(circle at 90% 60%, rgba(192, 38, 211, 0.25) 0%, transparent 45%);
+            background-attachment: fixed;
+            color: #f8fafc; 
+        }
+
+        #darrennala-theme.dark .bg-blue-500\/10,
+        #darrennala-theme.dark .tech-pill {
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+        }
+        
+        #darrennala-theme.dark .glass { background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.05); }
+
+        #darrennala-theme.dark .skill-badge {
+            background-color: #1e293b; 
+            color: #f8fafc;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Gaya Teks Khusus */
+        .text-gradient { background: linear-gradient(90deg, #38bdf8, #e879f9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .google-text { background: linear-gradient(to right, #4285F4, #EA4335, #FBBC05, #34A853); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .tech-pill { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 2px 10px; border-radius: 99px; font-size: 0.7rem; }
+        .focus-card { background: rgba(30, 41, 59, 0.3); border: 1px solid rgba(255,255,255,0.03); transition: all 0.3s ease; }
+        .focus-card:hover { background: rgba(30, 41, 59, 0.5); border-color: rgba(56, 189, 248, 0.3); transform: translateY(-3px); }
+
+        /* Navbar Glass Effect - Mode Gelap */
+        .nav-glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+
+        /* --- MODE TERANG (LIGHT MODE) STYLES --- */
+        #darrennala-theme:not(.dark) body {
+            background-color: #ffffff; 
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(219, 234, 254, 0.9) 0%, transparent 45%), 
+                radial-gradient(circle at 90% 40%, rgba(243, 232, 255, 0.9) 0%, transparent 45%), 
+                radial-gradient(circle at 50% 80%, rgba(252, 231, 243, 0.8) 0%, transparent 50%); 
+            background-attachment: fixed;
+            color: #1f2937;
+        }
+
+        #darrennala-theme:not(.dark) .nav-glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(0,0,0,0.05); }
+        #darrennala-theme:not(.dark) nav div { opacity: 0.8; color: #1f2937; }
+        #darrennala-theme:not(.dark) nav h1 { color: #111827; }
+        #darrennala-theme:not(.dark) nav div a { color: #4b5563; }
+        #darrennala-theme:not(.dark) nav div a:hover { color: #2563eb; }
+        
+        #darrennala-theme:not(.dark) .text-slate-400 { color: #6b7280; }
+        #darrennala-theme:not(.dark) Strong { color: #111827; }
+        #darrennala-theme:not(.dark) h2,
+        #darrennala-theme:not(.dark) h3,
+        #darrennala-theme:not(.dark) h4 { color: #111827; }
+
+        #darrennala-theme:not(.dark) .text-gradient { 
+            background: linear-gradient(90deg, #2563eb, #d946ef); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+
+        #darrennala-theme:not(.dark) .focus-card,
+        #darrennala-theme:not(.dark) .glass { background: rgba(255, 255, 255, 0.6); border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+        #darrennala-theme:not(.dark) .focus-card:hover { background: rgba(255, 255, 255, 0.9); border-color: rgba(37, 99, 235, 0.2); }
+
+        #darrennala-theme:not(.dark) .tech-pill { background: rgba(37, 99, 235, 0.08); color: #2563eb; border: 1px solid rgba(37, 99, 235, 0.2); }
+        #darrennala-theme:not(.dark) .btn-primary { background: linear-gradient(90deg, #4F46E5, #9333EA); color: #ffffff; }
+        #darrennala-theme:not(.dark) .btn-outline { border: 1px solid rgba(0,0,0,0.2); color: #1f2937; }
+        #darrennala-theme:not(.dark) .btn-outline:hover { background: rgba(0,0,0,0.05); }
+
+        #darrennala-theme:not(.dark) .skill-badge {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #374151; 
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .glass:hover { border: 1px solid rgba(59, 130, 246, 0.5); transform: translateY(-2px); }
+        
+        #mode-toggle { font-size: 1.1rem; cursor: pointer; transition: transform 0.3s ease; }
+        #mode-toggle:hover { transform: scale(1.1); }
+        #darrennala-theme:not(.dark) #mode-toggle { color: #2563eb; }
+
+        /* --- BASE STYLES BINGKAI FOTO --- */
+        .frame-offset-left::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 40px;
+            z-index: -1;
+            transform: translate(-10px, -10px) rotate(-3deg);
+            transition: border-color 0.3s ease;
+        }
+
+        #darrennala-theme.dark .frame-offset-left::before {
+            border: 2px solid rgba(56, 189, 248, 0.25);
+        }
+
+        #darrennala-theme:not(.dark) .frame-offset-left::before {
+            border: 3px solid rgba(37, 99, 235, 0.3); 
+        }
+
+        img.object-cover.rounded-\[40px\] { object-fit: cover; }
+        #darrennala-theme:not(.dark) img.object-cover.rounded-\[40px\] { border-color: rgba(0,0,0,0.05); }
     </style>
 </head>
-<body class="p-4 md:p-10">
+<body class="relative">
 
-    <nav class="flex justify-between items-center mb-16 max-w-5xl mx-auto">
-        <h1 class="text-xl font-bold tracking-tighter uppercase">DARREN<span class="text-blue-500">NALA</span>.</h1>
-        <div class="space-x-6 text-sm font-medium opacity-70">
-            <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
-            <a href="#experience" class="hover:text-blue-400 transition-colors">Experience</a>
-            <a href="#projects" class="hover:text-blue-400 transition-colors">Tech</a>
-            <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
-        </div>
-    </nav>
+    <div class="fixed top-8 left-0 w-full flex justify-center z-50 px-4">
+        <nav class="nav-glass w-full max-w-5xl rounded-full px-8 py-5 flex justify-between items-center shadow-lg">
+            <h1 id="navbar-title" class="text-xl font-bold tracking-tighter uppercase">DARRENNALA<span class="text-blue-500">  SANDEYAMUGNI</span></h1>
+            <div class="hidden md:flex space-x-10 text-sm font-medium opacity-80 text-slate-300">
+                <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
+                <a href="#experience" class="hover:text-blue-400 transition-colors">Experience</a>
+                <a href="#projects" class="hover:text-blue-400 transition-colors">Projects</a>
+                <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
+            </div>
+            <div class="flex items-center space-x-6">
+                <i id="mode-toggle" class="fas fa-moon"></i>
+            </div>
+        </nav>
+    </div>
 
-    <main class="max-w-4xl mx-auto">
-        <section id="about" class="mb-24">
-            <span class="px-3 py-1 text-xs font-medium bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20">Google Brand Ambassador Candidate 2026</span>
-            <h2 class="text-5xl md:text-7xl font-bold mt-6 mb-8 leading-tight">Driven by <span class="google-text">Curiosity</span>, Powered by Action.</h2>
-            <p class="text-lg text-slate-400 leading-relaxed max-w-2xl">
-                Halo! Saya <strong>Darrennala Sandeyamugni</strong>, mahasiswa Sistem Informasi Universitas Siliwangi. Saya memiliki rasa ingin tahu yang sangat tinggi terhadap dunia IT, khususnya programming. Bukti nyata eksplorasi saya adalah keberhasilan membangun dan <strong>mendeploy website</strong> menggunakan stack <strong>PHP, MySQL, HTML, CSS, dan JavaScript</strong> secara mandiri.
-            </p>
-            <p class="text-lg text-slate-400 leading-relaxed max-w-2xl mt-4">
-                Selain berkutat dengan kode, saya adalah pribadi yang aktif dan kompetitif. Saya menjaga kedisiplinan dan stamina fisik melalui olahraga rutin seperti <strong>basket, badminton, renang, dan lari</strong>.
-            </p>
+    <main class="max-w-6xl mx-auto pt-44 pb-20 px-6">
+        
+        <section id="home" class="min-h-[80vh] flex items-center mb-24">
+            <div class="grid md:grid-cols-2 gap-12 items-center w-full">
+                <div class="space-y-6">
+                    <span class="px-4 py-2 text-xs font-semibold bg-blue-500/10 text-blue-400 rounded-full border border-blue-500/20 shadow-sm inline-block">
+                        Google Brand Ambassador Candidate 2026
+                    </span>
+                    
+                    <h2 class="text-5xl md:text-6xl font-extrabold leading-tight">
+                        Halo, saya <br>
+                        <span class="text-gradient">Darrennala Sandeyamugni</span>
+                    </h2>
+                    
+                    <p class="text-slate-400 text-sm md:text-base font-medium flex items-center gap-2">
+                        Web Dev <span class="text-slate-600">•</span> Information Systems <span class="text-slate-600">•</span> Sports
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="#projects" class="btn-primary text-white px-8 py-3 rounded-full font-semibold text-sm hover:opacity-90 transition-opacity flex items-center gap-2 shadow-lg shadow-blue-500/10">
+                            View Projects <i class="fas fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="#contact" class="btn-outline text-slate-300 px-8 py-3 rounded-full font-semibold text-sm hover:bg-slate-800 transition-colors">
+                            Contact Me
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative flex justify-center md:justify-end">
+                    <div class="frame-offset-left relative w-[85%] md:w-[380px] h-[450px] md:h-[500px]">
+                        <img src="Images/darren_01.jpeg" 
+                             alt="Darrennala" 
+                             class="w-full h-full object-cover rounded-[40px] shadow-2xl shadow-blue-500/10 -rotate-3 hover:rotate-0 transition-all duration-500 border border-white/5">
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section id="experience" class="mb-24">
+        <section id="about" class="mb-32">
+            <div class="flex flex-col md:flex-row gap-12 items-center mb-20">
+                <div class="space-y-6 flex-1">
+                    <h2 class="text-4xl font-extrabold mb-8 tracking-tighter">Tentang Saya</h2>
+                    <p class="text-slate-400 text-sm md:text-base leading-relaxed max-w-2xl">
+                        Halo! Saya <strong>Darrennala Sandeyamugni</strong>, mahasiswa Sistem Informasi Universitas Siliwangi. Saya memiliki rasa ingin tahu yang sangat tinggi terhadap dunia IT, khususnya programming. Bukti nyata eksplorasi saya adalah keberhasilan membangun dan <strong>mendeploy website</strong> menggunakan stack <strong>PHP, MySQL, HTML, CSS, dan JavaScript</strong> secara mandiri.
+                    </p>
+                    <p class="text-slate-400 text-sm md:text-base leading-relaxed max-w-2xl">
+                        Selain berkutat dengan kode, saya adalah pribadi yang aktif dan kompetitif. Saya menjaga kedisiplinan dan stamina fisik melalui olahraga rutin seperti <strong>basket, badminton, renang, dan berlari</strong>.
+                    </p>
+                </div>
+                
+                <div class="relative flex justify-center border border-pink-500/20 rounded-[40px] p-2 bg-pink-500/5">
+                    <img src="https://images.unsplash.com/photo-1550136513-548af4445338?q=80&w=800&auto=format&fit=crop" 
+                         alt="About Darrennala" 
+                         class="w-full h-[350px] md:h-[400px] object-cover rounded-[32px]">
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center">
+                <h3 class="text-xl font-bold mb-10 text-center tracking-tight">Fokus Utama</h3>
+                <div class="grid md:grid-cols-3 gap-6 w-full">
+                    
+                    <div class="focus-card p-8 rounded-[30px] flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6 border border-blue-500/20">
+                            <i class="fas fa-laptop-code text-blue-400 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Web Development</h4>
+                        <p class="text-sm text-slate-400 leading-relaxed">Membangun website responsif dari front-end hingga manajemen database.</p>
+                    </div>
+
+                    <div class="focus-card p-8 rounded-[30px] flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-pink-500/10 rounded-2xl flex items-center justify-center mb-6 border border-pink-500/20">
+                            <i class="fas fa-tasks text-pink-400 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">IT Project Management</h4>
+                        <p class="text-sm text-slate-400 leading-relaxed">Mengelola siklus proyek IT dengan memadukan aspek teknis dan operasional.</p>
+                    </div>
+
+                    <div class="focus-card p-8 rounded-[30px] flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-purple-500/10 rounded-2xl flex items-center justify-center mb-6 border border-purple-500/20">
+                            <i class="fas fa-users-cog text-purple-400 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Leadership & Management</h4>
+                        <p class="text-sm text-slate-400 leading-relaxed">Memimpin tim, mengelola tata kelola organisasi, dan merancang strategi eksekusi.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <section id="experience" class="mb-24 pt-20">
             <h3 class="text-2xl font-bold mb-10 flex items-center"><i class="fas fa-layer-group mr-3 text-blue-500"></i> Journey & Leadership</h3>
             
             <div class="space-y-6 relative border-l-2 border-slate-800 ml-4 pl-8">
                 
                 <div class="glass p-6 rounded-2xl relative">
-                    <div class="absolute -left-[41px] top-7 w-4 h-4 bg-blue-500 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
+                    <div class="absolute -left-[41px] top-1/2 -translate-y-1/2 w-4 h-4 bg-blue-500 rounded-full shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
                     <div class="flex justify-between items-start mb-2">
                         <h4 class="font-bold text-lg">Badan Legislatif Mahasiswa (BLM) FT UNSIL</h4>
-                        <span class="text-xs font-bold text-blue-400">Mar 2026 - Present</span>
+                        <span class="text-xs font-bold text-blue-400">Feb 2026 - Present</span>
                     </div>
                     <p class="text-blue-300 text-xs font-semibold mb-2 uppercase tracking-wider">Anggota Komisi II (Administrasi & Anggaran)</p>
                     <p class="text-sm text-slate-400">Bertanggung jawab atas pengawasan regulasi, tata kelola administrasi, dan pengelolaan anggaran kelembagaan di tingkat Fakultas Teknik.</p>
                 </div>
 
                 <div class="glass p-6 rounded-2xl relative">
-                    <div class="absolute -left-[41px] top-7 w-4 h-4 bg-slate-700 rounded-full"></div>
+                    <div class="absolute -left-[41px] top-1/2 -translate-y-1/2 w-4 h-4 bg-slate-700 rounded-full"></div>
                     <div class="flex justify-between items-start mb-2">
                         <h4 class="font-bold text-lg">Sivolution 3.0</h4>
                         <span class="text-xs text-slate-500">2025</span>
                     </div>
                     <p class="text-blue-300 text-xs font-semibold mb-2 uppercase tracking-wider">Staf Dekorasi & Logistik (Deklog)</p>
-                    <p class="text-sm text-slate-400">Mengelola operasional teknis, pengadaan barang, dan infrastruktur acara untuk memastikan kelancaran event tahunan Sistem Informasi.</p>
+                    <p class="text-sm text-slate-400">Mengelola operasional teknis, pengadaan barang, dan infrastruktur acara untuk memastikan kelancaran event tahunan (Dies Natalis) Sistem Informasi.</p>
                 </div>
 
                 <div class="glass p-6 rounded-2xl relative">
-                    <div class="absolute -left-[41px] top-7 w-4 h-4 bg-slate-700 rounded-full"></div>
+                    <div class="absolute -left-[41px] top-1/2 -translate-y-1/2 w-4 h-4 bg-slate-700 rounded-full"></div>
                     <div class="flex justify-between items-start mb-2">
                         <h4 class="font-bold text-lg">Magang HMSI (Himpunan Mahasiswa Sistem Informasi)</h4>
                         <span class="text-xs text-slate-500">2025</span>
@@ -75,29 +276,29 @@
                 </div>
 
                 <div class="glass p-6 rounded-2xl relative">
-                    <div class="absolute -left-[41px] top-7 w-4 h-4 bg-slate-700 rounded-full"></div>
+                    <div class="absolute -left-[41px] top-1/2 -translate-y-1/2 w-4 h-4 bg-slate-700 rounded-full"></div>
                     <div class="flex justify-between items-start mb-2">
                         <h4 class="font-bold text-lg">P2M (Pengabdian pada Masyarakat) - HMSI</h4>
-                        <span class="text-xs text-slate-500">2024</span>
+                        <span class="text-xs text-slate-500">2025</span>
                     </div>
                     <p class="text-blue-300 text-xs font-semibold mb-2 uppercase tracking-wider">Staf Dekorasi & Logistik (Deklog)</p>
                     <p class="text-sm text-slate-400">Merancang distribusi logistik untuk kegiatan sosial di luar kampus dan memastikan fasilitas pendukung warga lokal tersedia dengan baik.</p>
                 </div>
 
                 <div class="glass p-6 rounded-2xl relative">
-                    <div class="absolute -left-[41px] top-7 w-4 h-4 bg-slate-700 rounded-full"></div>
+                    <div class="absolute -left-[41px] top-1/2 -translate-y-1/2 w-4 h-4 bg-slate-700 rounded-full"></div>
                     <div class="flex justify-between items-start mb-2">
                         <h4 class="font-bold text-lg">Mabim (Masa Bimbingan)</h4>
-                        <span class="text-xs text-slate-500">2024</span>
+                        <span class="text-xs text-slate-500">2025</span>
                     </div>
                     <p class="text-blue-300 text-xs font-semibold mb-2 uppercase tracking-wider">Staf Dekorasi & Logistik (Deklog)</p>
                     <p class="text-sm text-slate-400">Menyiapkan kebutuhan teknis dan properti orientasi guna menciptakan suasana edukatif yang teratur bagi mahasiswa baru.</p>
                 </div>
 
                 <div class="glass p-6 rounded-2xl relative">
-                    <div class="absolute -left-[41px] top-7 w-4 h-4 bg-slate-700 rounded-full"></div>
+                    <div class="absolute -left-[41px] top-1/2 -translate-y-1/2 w-4 h-4 bg-slate-700 rounded-full"></div>
                     <div class="flex justify-between items-start mb-2">
-                        <h4 class="font-bold text-lg">Ombus SI (Orientasi Mahasiswa Baru SI)</h4>
+                        <h4 class="font-bold text-lg">Ombus SI (Orientasi Mahasiswa Baru Sistem Informasi)</h4>
                         <span class="text-xs text-slate-500">2024</span>
                     </div>
                     <p class="text-blue-300 text-xs font-semibold mb-2 uppercase tracking-wider">Mentor / Pembimbing Maba</p>
@@ -107,7 +308,7 @@
             </div>
         </section>
 
-        <section id="projects" class="mb-24">
+        <section id="projects" class="mb-24 pt-20">
             <h3 class="text-2xl font-bold mb-8 flex items-center"><i class="fas fa-code mr-3 text-blue-500"></i> Technical Exploration</h3>
             <div class="grid md:grid-cols-2 gap-6">
                 <a href="https://www.sammelanaasa.my.id" target="_blank" class="block group">
@@ -126,29 +327,66 @@
                 <div class="glass p-8 rounded-3xl flex flex-col justify-center">
                     <h4 class="font-bold mb-4 text-center">Active Lifestyle & Skills</h4>
                     <div class="flex flex-wrap justify-center gap-3">
-                        <span class="bg-slate-800 px-4 py-2 rounded-xl text-sm"><i class="fas fa-basketball-ball mr-2 text-orange-500"></i> Basketball</span>
-                        <span class="bg-slate-800 px-4 py-2 rounded-xl text-sm"><i class="fas fa-running mr-2 text-yellow-500"></i> Running</span>
-                        <span class="bg-slate-800 px-4 py-2 rounded-xl text-sm"><i class="fas fa-swimmer mr-2 text-blue-400"></i> Swimming</span>
-                        <span class="bg-slate-800 px-4 py-2 rounded-xl text-sm"><i class="fas fa-badminton mr-2 text-green-400"></i> Badminton</span>
+                        <span class="skill-badge px-4 py-2 rounded-xl text-sm transition-colors"><i class="fas fa-basketball-ball mr-2 text-orange-500"></i> Basketball</span>
+                        <span class="skill-badge px-4 py-2 rounded-xl text-sm transition-colors"><i class="fas fa-running mr-2 text-yellow-500"></i> Running</span>
+                        <span class="skill-badge px-4 py-2 rounded-xl text-sm transition-colors"><i class="fas fa-swimmer mr-2 text-blue-400"></i> Swimming</span>
+                        <span class="skill-badge px-4 py-2 rounded-xl text-sm transition-colors"><i class="fas fa-badminton mr-2 text-green-400"></i> Badminton</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="text-center py-20 glass rounded-[40px]">
-            <h3 class="text-3xl font-bold mb-4">Let's Build Something.</h3>
-            <p class="text-slate-400 mb-8 max-w-md mx-auto">Tertarik berdiskusi soal IT, manajemen logistik, atau legislatif kampus? Saya selalu terbuka untuk koneksi baru.</p>
-            <div class="flex justify-center space-x-8">
-                <a href="https://www.instagram.com/sirftdarren" class="text-2xl hover:text-pink-500 transition-colors"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/in/darrennala-sandeyamugni-02bb4a356" class="text-2xl hover:text-blue-500 transition-colors"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:darrennala22@gmail.com" class="text-2xl hover:text-red-500 transition-colors"><i class="fas fa-envelope"></i></a>
+        <section id="contact" class="text-center pt-20 pb-10 glass rounded-[40px] mb-20">
+            <h3 class="text-3xl font-bold mb-4 tracking-tighter">Let's Build Something.</h3>
+            <p class="text-slate-400 mb-10 max-w-md mx-auto">Tertarik berdiskusi soal IT, legislatif kampus, atau hal lainnya? Saya selalu terbuka untuk koneksi baru.</p>
+            <div class="flex justify-center space-x-10 text-slate-400">
+                <a href="https://www.instagram.com/sirftdarren" class="text-3xl hover:text-pink-500 transition-colors"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/in/darrennala-sandeyamugni-02bb4a356" class="text-3xl hover:text-blue-500 transition-colors"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:darrennala22@gmail.com" class="text-3xl hover:text-red-500 transition-colors"><i class="fas fa-envelope"></i></a>
             </div>
         </section>
     </main>
 
-    <footer class="text-center text-xs text-slate-600 mt-20 pb-10">
+    <footer class="text-center text-xs text-slate-600 pb-10">
         &copy; 2026 Darrennala Sandeyamugni. Built with High Curiosity & Passion.
     </footer>
+
+    <script>
+        const htmlElement = document.getElementById('darrennala-theme');
+        const modeToggleBtn = document.getElementById('mode-toggle');
+        const navbarTitle = document.getElementById('navbar-title');
+
+        // Fungsi untuk memperbarui ikon navbar
+        function updateNavbarIcon(theme) {
+            if (theme === 'dark') {
+                modeToggleBtn.className = 'fas fa-moon text-slate-300'; // Ikon bulan untuk mode gelap
+            } else {
+                modeToggleBtn.className = 'fas fa-sun'; // Ikon matahari untuk mode terang
+            }
+        }
+
+        // Terapkan tema yang disimpan saat memuat
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        htmlElement.className = savedTheme;
+        updateNavbarIcon(savedTheme);
+
+        // Menangani klik tombol toggle
+        modeToggleBtn.addEventListener('click', () => {
+            if (htmlElement.classList.contains('dark')) {
+                // Ganti ke mode terang
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                updateNavbarIcon('light');
+            } else {
+                // Ganti ke mode gelap
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateNavbarIcon('dark');
+            }
+        });
+    </script>
 
 </body>
 </html>
